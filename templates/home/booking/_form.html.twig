@@ -1,0 +1,50 @@
+<section class="book_section layout_padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form_container">
+					{{ form_start(form) }}
+					<div>
+						<label>Email</label>
+						<input width="20" type="email" class="form-control" value="{{booking.owner}}" disabled placeholder="Email"/>
+
+					</div>
+					<div>
+						{{ form_label(form.restaurant) }}
+						<div class="form-error">
+							{{ form_errors(form.restaurant) }}
+						</div>
+						{{ form_widget(form.restaurant, {'attr': {'class': 'form-control frm-input', 'placeholder': 'How many persons?'}}) }}
+						<small>{{ form_help(form.restaurant) }}</small>
+					</div>
+					<div>
+						{{ form_label(form.nbPerson) }}
+						<div class="form-error">
+							{{ form_errors(form.nbPerson) }}
+						</div>
+						{{ form_widget(form.nbPerson, {'attr': {'class': 'form-control frm-input'}}) }}
+						<small>{{ form_help(form.nbPerson) }}</small>
+					</div>
+					<div>
+						{{ form_label(form.bookingAt) }}
+						<div class="form-error">
+							{{ form_errors(form.bookingAt) }}
+						</div>
+						{{ form_widget(form.bookingAt) }}
+						<small>{{ form_help(form.bookingAt) }}</small>
+					</div>
+					<div class="btn_box">
+						<button>{{ button_label|default('Book Now') }}</button>
+					</div>
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+			<div class="col-md-6" style="margin: 45px 0 0 0;">
+				<div class="map_container ">
+					<div id="googleMap"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

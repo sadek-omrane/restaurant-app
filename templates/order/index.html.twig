@@ -4,48 +4,70 @@
 {% endblock %}
 
 {% block body %}
-	<div style="min-height: 70vh;">
-		<h1>Order index</h1>
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Food</th>
-					<th>Qty</th>
-					<th>Address</th>
-					<th>OrderAt</th>
-					<th>Total</th>
-					<th>State</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for order in orders %}
-					<tr>
-						<td>{{ order.food }}</td>
-						<td>{{ order.Qty }}</td>
-						<td>{{ order.address }}</td>
-						<td>{{ order.orderAt ? order.orderAt|date('Y-m-d H:i:s') : '' }}</td>
-						<td>{{ order.Qty * order.food.getPrice() }}DT</td>
-						<td>
-							{% if order.isDelivred %}
-								<div class="p-1 bg-success text-white" style="width: fit-content; border-radius: 4px;">Delivred</div>
-							{% else %}
-								<div class="p-1 bg-danger text-white" style="width: fit-content; border-radius: 4px;">Prepared</div>
-							{% endif %}
-						</td>
-
-						<td>
-							<a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id}) }}">Show</a>
-							<a class="btn btn-primary" href="{{ path('app_order_edit', {'id': order.id}) }}">Edit</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="4">no records found</td>
-					</tr>
+	<div class="container">
+		<div style="min-height: 70vh;">
+			<h2 style="margin: 50px 0 40px 0;text-align: center;">Order List</h2>
+			<div style="display:flex; flex-direction: column;align-items: flex-start;">
+				{% for message in app.flashes('success') %}
+					<p class="alert alert-success">
+						{{ message }}
+					</p>
 				{% endfor %}
+				{% for message in app.flashes('danger') %}
+					<p class="alert alert-danger">
+						{{ message }}
+					</p>
+				{% endfor %}
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Restaurant</th>
+						<th>Food</th>
+						<th>Qty</th>
+						<th>Address</th>
+						<th>OrderAt</th>
+						<th>Total</th>
+						<th>State</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in orders %}
+						<tr>
+							<td>{{ order.restaurant }}</td>
+							<td>{{ order.food }}</td>
+							<td>{{ order.Qty }}</td>
+							<td>{{ order.address }}</td>
+							<td>{{ order.orderAt ? order.orderAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ order.total }}DT</td>
+							<td>
+								{% if order.isDelivred %}
+									<div class="p-1 bg-success text-white" style="width: fit-content; border-radius: 4px;">Delivred</div>
+								{% elseif order.isPayed %}
+									<div class="p-1 bg-warning text-white" style="width: fit-content; border-radius: 4px;">Prepared..</div>
+								{% else %}
+									<div class="p-1 bg-danger text-white" style="width: fit-content; border-radius: 4px;">Incomplete</div>
+								{% endif %}
+							</td>
+
+							<td>
+								{%if order.isDelivred == false %}
+									<a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id, 'Uid': app.user.id}) }}">Show</a>
+									<a class="btn btn-primary" href="{{ path('app_order_edit', {'id': order.id, 'Uid': app.user.id}) }}">Edit</a>
+									{% if order.isPayed == false %}
+										<a class="btn btn-primary" href="{{ path('app_order_checkout', {'id': order.id}) }}">Pay</a>
+									{% endif %}
+									{%endif%}</td>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
 			</tbody>
 		</table>
 	</div>
-{% endblock %}
+</div>{% endblock %}

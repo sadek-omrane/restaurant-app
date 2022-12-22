@@ -1,0 +1,76 @@
+<div style=" min-height: 50vh;display: flex;flex-direction: column; justify-content: center; align-items: center; margin: 0 0 30px 0;">
+	<div style="width: 400px;">
+		{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+		<div class="col-12">
+			{{ form_label(form.name) }}
+			<div class="form-error">
+				{{ form_errors(form.name) }}
+			</div>
+			{{ form_widget(form.name, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.name) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.price) }}
+			<div class="form-error">
+				{{ form_errors(form.price) }}
+			</div>
+			{{ form_widget(form.price, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.price) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.category) }}
+			<div class="form-error">
+				{{ form_errors(form.category) }}
+			</div>
+			{{ form_widget(form.category, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.category) }}</small>
+		</div>
+		<div class="col-12" hidden>
+			{{ form_label(form.restaurant) }}
+			<div class="form-error">
+				{{ form_errors(form.restaurant) }}
+			</div>
+			{{ form_widget(form.restaurant, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.restaurant) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.description) }}
+			<div class="form-error">
+				{{ form_errors(form.description) }}
+			</div>
+			{{ form_widget(form.description, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.description) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.image) }}
+			<div class="form-error">
+				{{ form_errors(form.image) }}
+			</div>
+			{{ form_widget(form.image, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.image) }}</small>
+		</div>
+		<div>
+			{{ form_widget(form.isFeatured) }}
+			{{ form_label(form.isFeatured) }}
+		</div>
+		<div>
+			{{ form_widget(form.isPromoted) }}
+			{{ form_label(form.isPromoted) }}
+		</div>
+		<div class="col-12">
+			{{ form_label(form.promotion) }}
+			%
+			<div class="form-error">
+				{{ form_errors(form.promotion) }}
+			</div>
+			{{ form_widget(form.promotion, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.promotion) }}</small>
+		</div>
+		<div>
+			<button style="width: 80px;" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+</div>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -26,6 +27,11 @@ class Order
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 100,
+     *      notInRangeMessage = "You must be between {{ min }} and {{ max }}",
+     * )
      */
     private $Qty;
 
@@ -50,10 +56,21 @@ class Order
      */
     private $isDelivred = false;
 
-    #/**
-    # * @ORM\Column(type="float")
-    # */
-    #private $total;
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="orders")
+     */
+    private $restaurant;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPayed;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $total;
+
 
     public function getId(): ?int
     {
@@ -140,6 +157,42 @@ class Order
     public function setIsDelivred(bool $isDelivred): self
     {
         $this->isDelivred = $isDelivred;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getCardPayment(): ?bool
+    {
+        return $this->card_payment;
+    }
+
+    public function setCardPayment(bool $card_payment): self
+    {
+        $this->card_payment = $card_payment;
+
+        return $this;
+    }
+
+    public function getIsPayed(): ?bool
+    {
+        return $this->isPayed;
+    }
+
+    public function setIsPayed(?bool $isPayed): self
+    {
+        $this->isPayed = $isPayed;
 
         return $this;
     }

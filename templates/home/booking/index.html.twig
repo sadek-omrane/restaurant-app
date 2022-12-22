@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking index
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div style="min-height: 70vh;">
+			<h1 style="margin: 50px 0 40px 0;text-align: center;">Booking List</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Restaurant</th>
+						<th>nbPerson</th>
+						<th>Booking At</th>
+						<th>Stat</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for booking in bookings %}
+						<tr>
+							<td>{{ booking.restaurant }}</td>
+							<td>{{ booking.nbPerson }}</td>
+							<td>{{ booking.bookingAt ? booking.bookingAt|date('Y-m-d') : ''  }}</td>
+							<td>
+								{% if booking.stat %}
+									<div class="p-1 bg-success text-white" style="width: fit-content; border-radius: 4px;">Valid</div>
+								{% else %}
+									<div class="p-1 bg-warning text-white" style="width: fit-content; border-radius: 4px;">Invalid</div>
+								{% endif %}
+							</td>
+							<td>
+								<a class="btn btn-primary" href="{{ path('app_booking_show', {'id': booking.id}) }}">Show</a>
+								<a class="btn btn-primary" href="{{ path('app_booking_edit', {'id': booking.id}) }}">Edit</a>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a class="btn btn-primary" href="{{ path('app_booking_new') }}">Create new</a>
+		</div>
+	</div>
+{% endblock %}

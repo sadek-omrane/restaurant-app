@@ -1,0 +1,15 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Category index
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 20px 0;text-align: center;">Edit Booking</h1>
+
+		{{ include('admin/booking_crud/_form.html.twig', {'button_label': 'Update'}) }}
+		<span style="position: relative;left: 95px;bottom: 128px;">
+			{{ include('admin/booking_crud/_delete_form.html.twig') }}
+		</span>
+
+	</div>
+{% endblock %}

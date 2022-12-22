@@ -1,0 +1,12 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}New Category
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 20px 0;text-align: center;">Create new Category</h1>
+
+		{{ include('admin/category_crud/_form.html.twig') }}
+
+	</div>
+{% endblock %}

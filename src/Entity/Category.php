@@ -29,6 +29,12 @@ class Category
      */
     private $food;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="categories")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+
     public function __construct()
     {
         $this->food = new ArrayCollection();
@@ -83,5 +89,17 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
     }
 }

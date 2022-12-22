@@ -4,33 +4,367 @@
 {% endblock %}
 
 {% block body %}
-	<div style="display: flex; ">
-		{% block aside %}
-			<div class="list-group" style="width: 260px; margin-right: 20px">
-				<a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-					All
-				</a>
-				{% for item in categories %}
-					<a href="#" class="list-group-item list-group-item-action">{{ item.Name }}</a>
+
+	<section class="offer_section ">
+		<div class="offer_container">
+			<div class="container ">
+				<div class="row">
+					{% for food in promotions %}
+						<div class="col-md-6  ">
+							<div class="box ">
+								<div class="img-box" style="display: flex;justify-content: center;align-items: center;">
+									<img src="{{asset('uploads/brochures/'~food.image)}}" alt="">
+								</div>
+								<div class="detail-box">
+									<h5>
+										{{food.name}}
+										days
+									</h5>
+									<h6>
+										<span>{{food.promotion}}%</span>
+										Off
+									</h6>
+									<a href="{{ path('app_order_new', {Fid: food.id, Rid: food.restaurant.id, Uid: app.user.id}) }}">
+										Order Now
+										<span style="color: white; font-size: 18px">
+											<i class="fa-solid fa-cart-shopping"></i>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<div class="heading_container heading_center margin-section">
+		<h2>
+			Our Restaurants
+		</h2>
+	</div>
+	<section id="gtco-special-dishes" class=" section-padding">
+		<div class="container">
+			<div class="section-content">
+				{% if restaurants|length > 1 %}
+					{% if restaurants|length % 2 == 0 %}
+						{% for i in range(0, restaurants|length-2, 2) %}
+							<div class="row mt-5">
+								<div class="col-lg-5 col-md-6 align-self-center py-5">
+									<h2 class="special-number">0{{i+1}}.</h2>
+									<div class="dishes-text">
+										<h3>
+											<span>{{restaurants[i].name}}</span><br>
+											Restaurant</h3>
+										<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, ea vero alias perferendis quas animi doloribus voluptates. Atque explicabo ea nesciunt provident libero qui eum, corporis esse quos excepturi soluta?</p>
+										<div style="color: #ffbe33">
+											{% for i in range(1, random(1, 4)) %}
+
+												<i class="fa-solid fa-star"></i>
+											{% endfor %}
+
+											<i class="fa-solid fa-star-half"></i>
+										</div>
+										<a href="{{path('restaurant', {id: restaurants[i].id})}}" class="btn-primary1 mt-3">Visit Us<span>
+												<i class="fa-solid fa-arrow-right-to-bracket"></i>
+											</span>
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+									<img src="{{asset('uploads/brochures/'~restaurants[i].image)}}" alt="" class="img-fluid shadow w-100">
+								</div>
+							</div>
+							<div class="row mt-5">
+								<div class="col-lg-5 col-md-6 align-self-center order-2 order-md-1 mt-4 mt-md-0">
+									<img src="{{asset('uploads/brochures/'~restaurants[i+1].image)}}" alt="" class="img-fluid shadow w-100">
+								</div>
+								<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center order-1 order-md-2 py-5">
+									<h2 class="special-number">0{{i+2}}.</h2>
+									<div class="dishes-text">
+										<h3>
+											<span>{{restaurants[i+1].name}}</span><br>
+											Restaurant</h3>
+										<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, accusamus culpa quam amet ipsam odit ea doloremque accusantium quo, itaque possimus eius. In a quis quibusdam omnis atque vero dolores!</p>
+										<div style="color: #ffbe33">
+											{% for i in range(1, random(1, 4)) %}
+
+												<i class="fa-solid fa-star"></i>
+											{% endfor %}
+
+											<i class="fa-solid fa-star-half"></i>
+										</div>
+										<a href="{{path('restaurant', {id: restaurants[i+1].id})}}" class="btn-primary1 mt-3">Visit Us<span>
+												<i class="fa-solid fa-arrow-right-to-bracket"></i>
+											</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						{% for i in range(0, restaurants|length-3, 2) %}
+							<div class="row mt-5">
+								<div class="col-lg-5 col-md-6 align-self-center py-5">
+									<h2 class="special-number">0{{i+1}}.</h2>
+									<div class="dishes-text">
+										<h3>
+											<span>{{restaurants[i].name}}</span><br>
+											Restaurant</h3>
+										<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, ea vero alias perferendis quas animi doloribus voluptates. Atque explicabo ea nesciunt provident libero qui eum, corporis esse quos excepturi soluta?</p>
+
+										<div style="color: #ffbe33">
+											{% for i in range(1, random(1, 4)) %}
+
+												<i class="fa-solid fa-star"></i>
+											{% endfor %}
+
+											<i class="fa-solid fa-star-half"></i>
+										</div>
+										<a href="{{path('restaurant', {id: restaurants[i].id})}}" class="btn-primary1 mt-3">Visit Us<span>
+												<i class="fa-solid fa-arrow-right-to-bracket"></i>
+											</span>
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+									<img src="{{asset('uploads/brochures/'~restaurants[i].image)}}" alt="" class="img-fluid shadow w-100">
+								</div>
+							</div>
+							<div class="row mt-5">
+								<div class="col-lg-5 col-md-6 align-self-center order-2 order-md-1 mt-4 mt-md-0">
+									<img src="{{asset('uploads/brochures/'~restaurants[i+1].image)}}" alt="" class="img-fluid shadow w-100">
+								</div>
+								<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center order-1 order-md-2 py-5">
+									<h2 class="special-number">0{{i+2}}.</h2>
+									<div class="dishes-text">
+										<h3>
+											<span>{{restaurants[i+1].name}}</span><br>
+											Restaurant</h3>
+										<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, accusamus culpa quam amet ipsam odit ea doloremque accusantium quo, itaque possimus eius. In a quis quibusdam omnis atque vero dolores!</p>
+										<div style="color: #ffbe33">
+											{% for i in range(1, random(1, 4)) %}
+
+												<i class="fa-solid fa-star"></i>
+											{% endfor %}
+
+											<i class="fa-solid fa-star-half"></i>
+										</div>
+										<a href="{{path('restaurant', {id: restaurants[i+1].id})}}" class="btn-primary1 mt-3">Visit Us<span>
+												<i class="fa-solid fa-arrow-right-to-bracket"></i>
+											</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+						<div class="row mt-5">
+							<div class="col-lg-5 col-md-6 align-self-center py-5">
+								<h2 class="special-number">0{{restaurants|length}}.</h2>
+								<div class="dishes-text">
+									<h3>
+										<span>{{restaurants[restaurants|length-1].name}}</span><br>
+										Restaurant</h3>
+									<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, ea vero alias perferendis quas animi doloribus voluptates. Atque explicabo ea nesciunt provident libero qui eum, corporis esse quos excepturi soluta?</p>
+									<div style="color: #ffbe33">
+										{% for i in range(1, random(1, 4)) %}
+
+											<i class="fa-solid fa-star"></i>
+										{% endfor %}
+
+										<i class="fa-solid fa-star-half"></i>
+									</div>
+									<a href="{{path('restaurant', {id: restaurants[restaurants|length-1].id})}}" class="btn-primary1 mt-3">Visit Us<span>
+											<i class="fa-solid fa-arrow-right-to-bracket"></i>
+										</span>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+								<img src="{{asset('uploads/brochures/'~restaurants[restaurants|length-1].image)}}" alt="" class="img-fluid shadow w-100">
+							</div>
+						</div>
+					{% endif %}
+				{% else %}
+					{% for restaurant in restaurants %}
+						<div class="row mt-5">
+							<div class="col-lg-5 col-md-6 align-self-center py-5">
+								<h2 class="special-number">01.</h2>
+								<div class="dishes-text">
+									<h3>
+										<span>{{restaurant.name}}</span><br>
+										Restaurant</h3>
+									<p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, ea vero alias perferendis quas animi doloribus voluptates. Atque explicabo ea nesciunt provident libero qui eum, corporis esse quos excepturi soluta?</p>
+									<div style="color: #ffbe33">
+										{% for i in range(1, random(1, 4)) %}
+
+											<i class="fa-solid fa-star"></i>
+										{% endfor %}
+
+										<i class="fa-solid fa-star-half"></i>
+									</div>
+									<a href="{{path('restaurant', {id: restaurant.id})}}" class="btn-primary1 mt-3">Visit Us<span>
+											<i class="fa-solid fa-arrow-right-to-bracket"></i>
+										</span>
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+								<img src="{{asset('uploads/brochures/'~restaurant.image)}}" alt="" class="img-fluid shadow w-100">
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</section>
+	<div class="heading_container heading_center margin-section">
+		<h2>
+			Best Spishes
+		</h2>
+	</div>
+
+	<section class="food_section layout_padding-bottom">
+		<div class="container">
+			<ul class="filters_menu">
+				{% set newArray = [] %}
+				{% for category in categories %}
+					{% if category.name not in newArray %}
+						{% set newArray = newArray|merge([category.name]) %}
+					{% endif %}
+				{% endfor %}
+				<li class="active" data-filter="*">All</li>
+				{% for category in newArray %}
+					<li data-filter=".{{category}}">{{category}}</li>
 				{% endfor %}
 
+
+			</ul>
+
+			<div class="filters-content">
+				<div class="row grid">
+					{% for food in features %}
+						<div class="col-sm-6 col-lg-4 all {{food.category}}">
+							<div class="box">
+								<div>
+									<div class="img-box">
+										<img src="{{asset('uploads/brochures/'~food.image)}}" alt="">
+									</div>
+									<div class="detail-box">
+										<h5>
+											Delicious
+											{{food.name}}
+										</h5>
+										<p>
+											Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+										</p>
+										<div class="options">
+											<h6>
+												${{food.price}}
+											</h6>
+											<a href="{{ path('app_order_new', {Fid: food.id, Rid: food.restaurant.id, Uid: app.user.id}) }}">
+												<span style="color: white; font-size: 18px">
+													<i class="fa-solid fa-cart-shopping"></i>
+												</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+
+				</div>
 			</div>
-		{% endblock %}
-		{% block content %}
-			<div style="width: 100%;display: flex; justify-content: space-between; flex-wrap: wrap;">
-				{% for food in foods %}
-					<div class="card" style="width: 18rem; margin-bottom: 20px">
-						<img src="{{ asset('uploads/images/products/'~food.image) }}" class="card-img-top" alt="image">
-						<div class="card-body">
-							<h5 class="card-title">{{food.name}}</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							<h6 class="card-subtitle mb-2 text-muted">Price:
-								{{food.price}}DT</h6>
-							<a href="{{ path('app_order_new', {id: food.id}) }}" class="btn btn-primary">Order</a>
+			<div class="btn-box">
+				<a href="">
+					View More
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="about_section layout_padding">
+		<div class="container  ">
+
+			<div class="row">
+				<div class="col-md-6 ">
+					<div class="img-box">
+						<img src="{{asset('uploads/brochures/about-img.png')}}" alt="">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="detail-box">
+						<div class="heading_container">
+							<h2>
+								We Are Restaurant
+							</h2>
+						</div>
+						<p>
+							There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+																																																																																																																																																																																																																																																																																																																																		in some form, by injected humour, or randomised words which don't look even slightly believable. If you
+																																																																																																																																																																																																																																																																																																																																		are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
+																																																																																																																																																																																																																																																																																																																																		the middle of text. All
+						</p>
+						<a href="">
+							Read More
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{ include('home/booking/_form.html.twig')}}
+	<section class="client_section layout_padding-bottom">
+		<div class="container">
+			<div class="heading_container heading_center psudo_white_primary mb_45">
+				<h2>
+					What Says Our Customers
+				</h2>
+			</div>
+			<div class="carousel-wrap row ">
+				<div class="owl-carousel client_owl-carousel">
+					<div class="item">
+						<div class="box">
+							<div class="detail-box">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+								</p>
+								<h6>
+									Moana Michell
+								</h6>
+								<p>
+									magna aliqua
+								</p>
+							</div>
+							<div class="img-box">
+								<img src="{{asset('uploads/brochures/client1.jpg')}}" alt="" class="box-img">
+							</div>
 						</div>
 					</div>
-				{% endfor %}
+					<div class="item">
+						<div class="box">
+							<div class="detail-box">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+								</p>
+								<h6>
+									Mike Hamell
+								</h6>
+								<p>
+									magna aliqua
+								</p>
+							</div>
+							<div class="img-box">
+								<img src="{{asset('uploads/brochures/client2.jpg')}}" alt="" class="box-img">
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		{% endblock %}
-	</div>
+		</div>
+	</section>
 {% endblock %}

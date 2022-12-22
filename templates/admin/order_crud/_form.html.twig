@@ -1,0 +1,56 @@
+<div style=" min-height: 50vh;display: flex;flex-direction: column; justify-content: center; align-items: center; margin: 0 0 30px 0;">
+	<div style="width: 400px;">
+		{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+		<div class="col-12">
+			{{ form_label(form.owner) }}
+			<div class="form-error">
+				{{ form_errors(form.owner) }}
+			</div>
+			{{ form_widget(form.owner, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.owner) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.food) }}
+			<div class="form-error">
+				{{ form_errors(form.food) }}
+			</div>
+			{{ form_widget(form.food, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.food) }}</small>
+		</div>
+		<div hidden class="col-12">
+			{{ form_label(form.restaurant) }}
+			<div class="form-error">
+				{{ form_errors(form.restaurant) }}
+			</div>
+			{{ form_widget(form.restaurant, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.restaurant) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.Qty) }}
+			<div class="form-error">
+				{{ form_errors(form.Qty) }}
+			</div>
+			{{ form_widget(form.Qty, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.Qty) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.Address) }}
+			<div class="form-error">
+				{{ form_errors(form.Address) }}
+			</div>
+			{{ form_widget(form.Address, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.Address) }}</small>
+		</div>
+		<div>
+			{{ form_widget(form.isDelivred) }}
+			{{ form_label(form.isDelivred) }}
+		</div>
+		<div>
+			<button style="width: 80px;" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+</div>

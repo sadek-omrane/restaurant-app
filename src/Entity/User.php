@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -29,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
@@ -51,18 +52,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10000000,
+     *      max = 99999999,
+     *      notInRangeMessage = "You must be between {{ min }} and {{ max }}",
+     * )
      */
     private $phone;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10000000,
+     *      max = 99999999,
+     *      notInRangeMessage = "You must be between {{ min }} and {{ max }}",
+     * )
      */
     private $cin;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Restaurant::class, mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $restaurant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="owner")
+     */
+    private $bookings;
 
 
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +242,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCin(int $cin): self
     {
         $this->cin = $cin;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($restaurant === null && $this->restaurant !== null) {
+            $this->restaurant->setOwner(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($restaurant !== null && $restaurant->getOwner() !== $this) {
+            $restaurant->setOwner($this);
+        }
+
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getOwner() === $this) {
+                $booking->setOwner(null);
+            }
+        }
 
         return $this;
     }

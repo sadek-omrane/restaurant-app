@@ -45,10 +45,10 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Order[] Returns an array of Order objects
-    //  */
-    /*
+    /**
+     * @return Order[] Returns an array of Order objects
+     */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('o')
@@ -57,10 +57,9 @@ class OrderRepository extends ServiceEntityRepository
             ->orderBy('o.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Order

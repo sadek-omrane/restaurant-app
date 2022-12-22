@@ -1,0 +1,22 @@
+<div style=" min-height: 50vh;display: flex;flex-direction: column; justify-content: center; align-items: center; margin: 0 0 30px 0;">
+	<div style="width: 400px;">
+		{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+		<div class="col-12">
+			{{ form_label(form.name) }}
+			<div class="form-error">
+				{{ form_errors(form.name) }}
+			</div>
+			{{ form_widget(form.name, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.name) }}</small>
+		</div>
+		<div class="col-12" hidden>
+			{{ form_widget(form.restaurant, {'attr': {'class': 'form-control frm-input'}}) }}
+		</div>
+		<div>
+			<button style="width: 80px; " class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+</div>

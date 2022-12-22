@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+{% block body %}
+	<div style="display: flex;">
+		{% block dashboard %}
+			<div class="d-flex flex-column flex-shrink-0 p-3" style="width: 230px; min-height: 89vh;">
+				<hr>
+				<ul class="nav nav-pills flex-column mb-auto myDIV">
+					{%if app.user %}
+						<li>
+							<a href="{{path('app_admin_dashboard')}}" {% if route_name in ['app_admin_dashboard'] %} class="nav-link link-dark active " style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+								<i class="fa-solid fa-chart-line"></i>
+								Dashboard
+							</a>
+						</li>
+						{% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+							<li>
+								<a href="{{path('app_admin_user_crud_index')}}" {% if route_name in ['app_admin_user_crud_index', 'app_admin_user_crud_new', 'app_admin_user_crud_show', 'app_admin_user_crud_edit', 'app_admin_user_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-solid fa-user-group"></i>
+									Users
+								</a>
+							</li>
+
+
+							<li>
+								<a href="{{path('app_admin_order_crud_index')}}" {% if route_name in ['app_admin_order_crud_index', 'app_admin_order_crud_new', 'app_admin_order_crud_show', 'app_admin_order_crud_edit', 'app_admin_order_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-brands fa-shopify"></i>
+									Orders
+								</a>
+							</li>
+
+							<li>
+								<a href="{{path('app_admin_restaurant_crud_index')}}" {% if route_name in ['app_admin_restaurant_crud_index', 'app_admin_restaurant_crud_new', 'app_admin_restaurant_crud_show', 'app_admin_restaurant_crud_edit', 'app_admin_restaurant_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-solid fa-shop"></i>
+									Restaurants
+								</a>
+							</li>
+						{% else %}
+
+							<li>
+								<a href="{{path('app_admin_order_crud_index')}}" {% if route_name in ['app_admin_order_crud_index', 'app_admin_order_crud_new', 'app_admin_order_crud_show', 'app_admin_order_crud_edit', 'app_admin_order_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-brands fa-shopify"></i>
+									Orders
+								</a>
+							</li>
+							<li>
+								<a href="{{path('app_admin_booking_crud_index')}}" {% if route_name in ['app_admin_booking_crud_index', 'app_admin_booking_crud_new', 'app_admin_booking_crud_show', 'app_admin_booking_crud_edit', 'app_admin_booking_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-solid fa-door-closed"></i>
+									Bookings
+								</a>
+							</li>
+							<li>
+								<a href="{{path('app_admin_food_crud_index')}}" {% if route_name in ['app_admin_food_crud_index', 'app_admin_food_crud_new', 'app_admin_food_crud_show', 'app_admin_food_crud_edit', 'app_admin_food_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-solid fa-utensils"></i>
+									Foods
+								</a>
+							</li>
+							<li>
+								<a href="{{path('app_admin_category_crud_index')}}" {% if route_name in ['app_admin_category_crud_index', 'app_admin_category_crud_new', 'app_admin_category_crud_show', 'app_admin_category_crud_edit', 'app_admin_category_crud_delete'] %} class="nav-link link-dark active" style="background-color: #ffbe33;" {% else %} class="nav-link link-dark" style="background-color: transparent;" {% endif %}>
+									<i class="fa-solid fa-tags"></i>
+									Categories
+								</a>
+							</li>
+						{% endif %}
+						{%endif%}
+					</ul>
+					<hr>
+
+				</div>
+
+			{% endblock %}
+			<div class="container">
+				{% block adminContent %}
+					<h1 style="margin: 50px 0 20px 0;text-align: center;">Dashboard</h1>
+					{% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+						<div style="display:flex; justify-content: space-between;">
+							<div class="card" style="width: 18rem; height: 450px">
+
+								<div style="background-color: #ffbe33c2; width: ; height: 200px; display:flex; justify-content: center; align-items: center;">
+									<i style="color: white; font-size: 80px;" class="fa-solid fa-users-line"></i>
+								</div>
+								<div style="padding: 20px 10px">
+									<h5 style="text-align: center;">USERS</h5>
+									<div>how many admins</div>
+									<div style="color: #007bff; font-size: 20px">+{{admins}}</div>
+									<div>how many users</div>
+									<div style="color: #007bff; font-size: 20px">+{{users}}</div>
+									<div>how many visitors</div>
+									<div style="color: #007bff; font-size: 20px">+{{visitors}}</div>
+								</div>
+							</div>
+							<div class="card" style="width: 18rem; height: 450px">
+
+								<div style="background-color: #ffbe33c2; width: ; height: 200px; display:flex; justify-content: center; align-items: center;">
+									<i style="color: white; font-size: 80px;" class="fa-solid fa-list-check"></i>
+								</div>
+								<div style="padding: 20px 10px">
+									<h5 style="text-align: center;">ORDERS</h5>
+									<div>incoms</div>
+									<div style="color: #007bff; font-size: 20px">+{{incoms}}
+										$</div>
+									<div>how many order</div>
+									<div style="color: #007bff; font-size: 20px">+{{orders}}</div>
+									<div>order delivred</div>
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{delivred}}%"></div>
+									</div>
+									<div>order payed</div>
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{payed}}%"></div>
+									</div>
+								</div>
+							</div>
+							<div class="card" style="width: 18rem; height: 450px">
+
+								<div style="background-color: #ffbe33c2; width: ; height: 200px; display:flex; justify-content: center; align-items: center;">
+									<i style="color: white; font-size: 80px;" class="fa-solid fa-building"></i>
+									<i class="fa-solid "></i>
+								</div>
+								<div style="padding: 20px 10px">
+									<h5 style="text-align: center;">RESTAURANT</h5>
+									<div>hom many restaurants</div>
+									<div style="color: #007bff; font-size: 20px">+{{restaurants}}
+									</div>
+									<div>how many categories</div>
+									<div style="color: #007bff; font-size: 20px">+{{categories}}</div>
+									<div>how many foods</div>
+									<div style="color: #007bff; font-size: 20px">+{{foods}}</div>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endblock %}
+			</div>
+
+		</div>
+	{% endblock %}

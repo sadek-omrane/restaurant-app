@@ -1,0 +1,28 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Category
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">Category</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ category.id }}</td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td>{{ category.name }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div style="display: flex">
+			<a class="btn btn-primary" href="{{ path('app_admin_category_crud_edit', {'id': category.id}) }}">edit</a>
+
+			<span style="margin: 0 0 0 4px">{{ include('admin/category_crud/_delete_form.html.twig') }}</span>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}User
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">User</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ user.id }}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ user.email }}</td>
+				</tr>
+				<tr>
+					<th>Roles</th>
+					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+				</tr>
+				<tr>
+					<th>Password</th>
+					<td>{{ user.password }}</td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td>{{ user.name }}</td>
+				</tr>
+				<tr>
+					<th>Phone</th>
+					<td>{{ user.phone }}</td>
+				</tr>
+				<tr>
+					<th>Cin</th>
+					<td>{{ user.cin }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div style="display: flex">
+			<a class="btn btn-primary" href="{{ path('app_admin_user_crud_edit', {'id': user.id}) }}">edit</a>
+
+			<span style="margin: 0 0 0 4px">{{ include('admin/user_crud/_delete_form.html.twig') }}</span>
+		</div>
+	</div>
+{% endblock %}

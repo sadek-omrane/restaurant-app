@@ -1,0 +1,12 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Edit Category
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 20px 0;text-align: center;">Edit Category</h1>
+
+		{{ include('admin/category_crud/_form.html.twig', {'button_label': 'Update'}) }}
+		<span style="position: relative;left: 39%; bottom: 243px;">{{ include('admin/category_crud/_delete_form.html.twig') }}</span>
+	</div>
+{% endblock %}

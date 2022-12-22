@@ -1,0 +1,10 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Category index
+{% endblock %}
+
+{% block adminContent %}
+	<h1 style="margin: 50px 0 40px 0;text-align: center;">Book A Table</h1>
+
+	{{ include('admin/booking_crud/_form.html.twig') }}
+
+{% endblock %}

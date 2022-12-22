@@ -1,0 +1,42 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">User index</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.email }}</td>
+						<td>{{ user.name }}</td>
+						<td>{{ user.phone }}</td>
+						<td>
+							<a class="btn btn-primary" href="{{ path('app_admin_user_crud_show', {'id': user.id}) }}">show</a>
+							<a class="btn btn-primary" href="{{ path('app_admin_user_crud_edit', {'id': user.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a class="btn btn-primary" style="margin: 0 0 50px 0;" href="{{ path('app_admin_user_crud_new') }}">Create new</a>
+	</div>
+{% endblock %}

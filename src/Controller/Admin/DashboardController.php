@@ -2,39 +2,39 @@
 
 namespace App\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Repository\CategoryRepository;
+use App\Repository\FoodRepository;
+use App\Repository\OrderRepository;
+use App\Repository\RestaurantRepository;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Entity\Category;
-use App\Entity\Order;
-use App\Entity\Food;
 
-
-class DashboardController extends AbstractDashboardController
+class DashboardController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="app_admin_dashboard")
      */
-    public function index(): Response
+    public function index(OrderRepository $orderRepo, FoodRepository $foodRepo, UserRepository $userRepo, RestaurantRepository $restaurantRepo, CategoryRepository $categoryRepo): Response
     {
-        return $this->render('admin/dashboard.html.twig', []);
-    }
-
-    public function configureDashboard(): Dashboard
-    {
-        return Dashboard::new()
-            ->setTitle('Restaurant');
-    }
-
-    public function configureMenuItems(): iterable
-    {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('User', 'fas fa-users', User::class)->setPermission('ROLE_SUPER_ADMIN');
-        yield MenuItem::linkToCrud('Order', 'fas fa-file', Order::class);
-        yield MenuItem::linkToCrud('Food', 'fas fa-utensils', Food::class);
-        yield MenuItem::linkToCrud('Category', 'fas fa-clipboard-list', Category::class);
+        $users = count($userRepo->findAll());
+        $visitors = $users * 3;
+        $orders = count($orderRepo->findAll());
+        $delivred = count($orderRepo->findBy(['isDelivred' => true])) * 100 / $orders;
+        $orderPayed = $orderRepo->findBy(['isPayed' => true]);
+        $payed = count($orderPayed) * 100 / $orders;
+        $incoms = 0;
+        for ($i = 0; $i < count($orderPayed); $i++) {
+            $incoms = $incoms + $orderPayed[$i]->getTotal();
+        }
+        $restaurants = count($restaurantRepo->findAll());
+        $admins = $restaurants;
+        $foods = count($foodRepo->findAll());
+        $categories = count($categoryRepo->findAll());
+        return $this->render('admin/index.html.twig', [
+            'users' => $users, 'visitors' => $visitors, 'orders' => $orders, 'delivred' => $delivred, 'payed' => $payed,
+            'incoms' => $incoms, 'restaurants' => $restaurants, 'admins' => $admins, 'foods' => $foods, 'categories' => $categories
+        ]);
     }
 }

@@ -1,0 +1,41 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Order
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">Order</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ order.id }}</td>
+				</tr>
+				<tr>
+					<th>Qty</th>
+					<td>{{ order.Qty }}</td>
+				</tr>
+				<tr>
+					<th>OrderAt</th>
+					<td>{{ order.orderAt ? order.orderAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Address</th>
+					<td>{{ order.Address }}</td>
+				</tr>
+				<tr>
+					<th>IsDelivred</th>
+					<td>{{ order.isDelivred ? 'Yes' : 'No' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div style="display: flex">
+			<a class="btn btn-primary" href="{{ path('app_admin_order_crud_edit', {'id': order.id}) }}">edit</a>
+
+			<span style="margin: 0 0 0 4px">{{ include('admin/order_crud/_delete_form.html.twig') }}</span>
+		</div>
+	</div>
+{% endblock %}

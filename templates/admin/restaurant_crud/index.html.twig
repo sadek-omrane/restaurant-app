@@ -1,0 +1,50 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Restaurant index
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">Restaurant index</h1>
+		<div style="display:flex; flex-direction: column;align-items: flex-start;">
+			{% for message in app.flashes('success') %}
+				<p class="alert alert-success">
+					{{ message }}
+				</p>
+			{% endfor %}
+			{% for message in app.flashes('danger') %}
+				<p class="alert alert-danger">
+					{{ message }}
+				</p>
+			{% endfor %}
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Owner</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for restaurant in restaurants %}
+					<tr>
+						<td>{{ restaurant.owner }}</td>
+						<td>{{ restaurant.name }}</td>
+						<td>{{ restaurant.address }}</td>
+						<td>
+							<a class="btn btn-primary" href="{{ path('app_admin_restaurant_crud_show', {'id': restaurant.id}) }}">show</a>
+							<a class="btn btn-primary" href="{{ path('app_admin_restaurant_crud_edit', {'id': restaurant.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a class="btn btn-primary" style="margin: 0 0 50px 0;" href="{{ path('app_admin_restaurant_crud_new') }}">Create new</a>
+	</div>
+{% endblock %}

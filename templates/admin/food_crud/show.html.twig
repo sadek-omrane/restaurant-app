@@ -1,0 +1,55 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Food
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">Food</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ food.id }}</td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td>{{ food.name }}</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>{{ food.price }}</td>
+				</tr>
+				<tr>
+					<th>Category</th>
+					<td>{{ food.category }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ food.description }}</td>
+				</tr>
+				<tr>
+					<th>Image</th>
+					<td>{{ food.image }}</td>
+				</tr>
+				<tr>
+					<th>isFeatured</th>
+					<td>{{ food.isFeatured }}</td>
+				</tr>
+				<tr>
+					<th>isPromoted</th>
+					<td>{{ food.isPromoted }}</td>
+				</tr>
+				<tr>
+					<th>promotion</th>
+					<td>{{ food.promotion }}%</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div style="display: flex">
+			<a class="btn btn-primary" href="{{ path('app_admin_food_crud_edit', {'id': food.id}) }}">edit</a>
+			<span style="margin: 0 0 0 4px">{{ include('admin/food_crud/_delete_form.html.twig') }}</span>
+		</div>
+	</div>
+{% endblock %}

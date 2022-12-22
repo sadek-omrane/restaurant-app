@@ -1,0 +1,156 @@
+<div class="hero_area">
+	<div class="bg-box">
+		<img src="{{asset('uploads/brochures/hero-bg.jpg')}}" alt="">
+	</div>
+	<!-- header section strats -->
+	<header class="header_section">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg custom_nav-container ">
+				<a class="navbar-brand" href="{{ path('home') }}">
+					<span>
+						Feane
+					</span>
+				</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class=""></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav  mx-auto ">
+						{%if app.user %}
+							{% if 'ROLE_ADMIN' in app.user.roles %}
+								<li {% if route_name in ['app_admin_dashboard', 'app_admin_category_crud_index', 'app_admin_category_crud_new', 'app_admin_category_crud_show', 'app_admin_category_crud_edit', 'app_admin_category_crud_delete', 'app_admin_user_crud_delete', 'app_admin_user_crud_edit', 'app_admin_user_crud_show', 'app_admin_user_crud_new', 'app_admin_user_crud_index', 'app_admin_restaurant_crud_index', 'app_admin_restaurant_crud_new', 'app_admin_restaurant_crud_show', 'app_admin_restaurant_crud_edit', 'app_admin_restaurant_crud_delete', 'app_admin_restaurant_crud_delete', 'app_admin_restaurant_crud_edit', 'app_admin_restaurant_crud_show', 'app_admin_restaurant_crud_new', 'app_admin_restaurant_crud_index', 'app_admin_order_crud_index', 'app_admin_order_crud_new', 'app_admin_order_crud_show', 'app_admin_order_crud_edit', 'app_admin_order_crud_delete', 'app_admin_food_crud_delete', 'app_admin_food_crud_edit', 'app_admin_food_crud_show', 'app_admin_food_crud_new', 'app_admin_food_crud_index'] %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+									<a class="nav-link" href="{{path('app_admin_dashboard')}}">Admin</a>
+								</li>
+								{%endif%}
+								{%endif%}
+								<li class="nav-item ">
+									<a class="nav-link" href="{{path('home')}}">Home
+										<span class="sr-only">(current)</span>
+									</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="{{path('about')}}">About</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{{path('app_booking_index')}}">Bookings</a>
+								</li>
+							</ul>
+							<div class="user_option">
+								{% if app.user %}
+									<form class="form-inline">
+										<button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
+									</form>
+									<a class="user_link" style="text-decoration: none;" href="{{path('app_order_index', {Uid: app.user.id})}}">
+										<i class="fa-solid fa-cart-shopping"></i>
+
+									</a>
+
+
+									<a href="" class="user_link" style="text-decoration: none;">
+										<i class="fa fa-user"></i>
+										<span>{{app.user.name|upper}}</span>
+									</a>
+
+
+									<a href="{{path('logout')}}" class="order_online">
+										<i class="fa-solid fa-arrow-right-from-bracket"></i>
+									</a>
+								{% else %}
+									<a href="{{path('login')}}" class="order_online">Login
+										<i class="fa-solid fa-arrow-right-to-bracket"></i>
+									</a>
+									{%endif%}
+								</div>
+							</div>
+						</nav>
+					</div>
+				</header>
+				<!-- end header section -->
+				<!-- slider section -->
+				{% if route_name == 'home' %}
+					<section class="slider_section ">
+						<div id="customCarousel1" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<div class="container ">
+										<div class="row">
+											<div class="col-md-7 col-lg-6 ">
+												<div class="detail-box">
+													<h1>
+														Fast Food Restaurant
+													</h1>
+													<p>
+														Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+													</p>
+													<div class="btn-box">
+														<a href="" class="btn1">
+															Order Now
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item ">
+									<div class="container ">
+										<div class="row">
+											<div class="col-md-7 col-lg-6 ">
+												<div class="detail-box">
+													<h1>
+														Fast Food Restaurant
+													</h1>
+													<p>
+														Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+													</p>
+													<div class="btn-box">
+														<a href="" class="btn1">
+															Order Now
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="container ">
+										<div class="row">
+											<div class="col-md-7 col-lg-6 ">
+												<div class="detail-box">
+													<h1>
+														Fast Food Restaurant
+													</h1>
+													<p>
+														Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+													</p>
+													<div class="btn-box">
+														<a href="" class="btn1">
+															Order Now
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<ol class="carousel-indicators">
+									<li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+									<li data-target="#customCarousel1" data-slide-to="1"></li>
+									<li data-target="#customCarousel1" data-slide-to="2"></li>
+								</ol>
+							</div>
+						</div>
+
+					</section>
+				{% endif %}
+
+				<!-- end slider section -->
+			</div>

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FoodRepository::class)
@@ -48,22 +49,35 @@ class Food
     private $orders;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
-     * @var File
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="foods")
      */
-    private $imageFile;
+    private $restaurant;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $updatedAt;
+    private $isFeatured;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPromoted;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99,
+     *      notInRangeMessage = "You must be between {{ min }}% and {{ max }}%",
+     * )
+     */
+    private $promotion;
+
 
     public function __construct()
     {
@@ -153,23 +167,6 @@ class Food
         return $this;
     }
 
-    public function setImageFile(File $image = null)
-    {
-        $this->imageFile = $image;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
 
 
 
@@ -186,6 +183,54 @@ class Food
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getIsFeatured(): ?bool
+    {
+        return $this->isFeatured;
+    }
+
+    public function setIsFeatured(?bool $isFeatured): self
+    {
+        $this->isFeatured = $isFeatured;
+
+        return $this;
+    }
+
+    public function getIsPromoted(): ?bool
+    {
+        return $this->isPromoted;
+    }
+
+    public function setIsPromoted(?bool $isPromoted): self
+    {
+        $this->isPromoted = $isPromoted;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?int
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?int $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }

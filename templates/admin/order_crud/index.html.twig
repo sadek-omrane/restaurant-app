@@ -1,0 +1,59 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Order index
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh;">
+		<div>
+			<h1 style="margin: 50px 0 40px 0;text-align: center;">Order index</h1>
+			<div style="display:flex; flex-direction: column;align-items: flex-start;">
+				{% for message in app.flashes('success') %}
+					<p class="alert alert-success">
+						{{ message }}
+					</p>
+				{% endfor %}
+				{% for message in app.flashes('danger') %}
+					<p class="alert alert-danger">
+						{{ message }}
+					</p>
+				{% endfor %}
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Qty</th>
+						<th>OrderAt</th>
+						<th>Address</th>
+						<th>IsPayed</th>
+						<th>IsDelivred</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in orders %}
+						<tr>
+							<td>{{ order.id }}</td>
+							<td>{{ order.Qty }}</td>
+							<td>{{ order.orderAt ? order.orderAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ order.Address }}</td>
+							<td>{{ order.isPayed ? 'Yes' : 'No' }}</td>
+							<td>{{ order.isDelivred ? 'Yes' : 'No' }}</td>
+							<td>
+								<a class="btn btn-primary" href="{{ path('app_admin_order_crud_show', {'id': order.id}) }}">show</a>
+								<a class="btn btn-primary" href="{{ path('app_admin_order_crud_edit', {'id': order.id}) }}">edit</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a class="btn btn-primary" style="margin: 0 0 50px 0;" href="{{ path('app_admin_order_crud_new') }}">Create new</a>
+		</div>
+	</div>
+{% endblock %}

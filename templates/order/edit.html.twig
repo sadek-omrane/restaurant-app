@@ -5,9 +5,13 @@
 
 {% block body %}
 	<div>
-		<h1>Edit Order</h1>
+		<h2 style="margin: 50px 0 0 0;text-align: center;">Edit Order</h2>
 
 		{{ include('order/_form.html.twig', {'button_label': 'Update'}) }}
-		{{ include('order/_delete_form.html.twig') }}
-	</div>
-{% endblock %}
+		{%if order.isDelivred ==false %}
+			<span style="position: relative;left: 44%; bottom: 99px;">
+				{{ include('order/_delete_form.html.twig') }}
+			</span>
+			{%endif%}
+		</div>
+	{% endblock %}

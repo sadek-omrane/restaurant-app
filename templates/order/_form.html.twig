@@ -2,6 +2,10 @@
 	<div style="width: 400px;">
 		{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
 		<div class="col-12">
+			<label>Restaurant</label>
+			<input type="text" value="{{order.restaurant}}" class="form-control frm-input" disabled>
+		</div>
+		<div class="col-12">
 			<label>Food</label>
 			<input type="text" value="{{order.food}}" class="form-control frm-input" disabled>
 		</div>
@@ -21,9 +25,10 @@
 			{{ form_widget(form.address, {'attr': {'class': 'form-control frm-input'}}) }}
 			<small>{{ form_help(form.address) }}</small>
 		</div>
-		<a style="width: 120px;" class="btn btn-primary" href="{{ path('app_order_index') }}">Back to list</a>
-		<button style="width: 80px; margin: 16px 0 0 10px;" class="btn btn-primary">{{ button_label|default('Order') }}</button>
-		{{ form_end(form) }}
+		{%if order.isDelivred ==false %}
+			<button style="width: 80px; margin: 16px 0 0 10px;" class="btn btn-primary">{{ button_label|default('Order') }}</button>
+			{%endif%}
+			{{ form_end(form) }}
 
+		</div>
 	</div>
-</div>

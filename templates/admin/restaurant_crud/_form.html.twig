@@ -1,0 +1,51 @@
+<div style=" min-height: 50vh;display: flex;flex-direction: column; justify-content: center; align-items: center; margin: 0 0 30px 0;">
+	<div style="width: 400px;">
+		{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+		<div class="col-12">
+			{{ form_label(form.name) }}
+			<div class="form-error">
+				{{ form_errors(form.name) }}
+			</div>
+			{{ form_widget(form.name, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.name) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.address) }}
+			<div class="form-error">
+				{{ form_errors(form.address) }}
+			</div>
+			{{ form_widget(form.address, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.address) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.description) }}
+			<div class="form-error">
+				{{ form_errors(form.description) }}
+			</div>
+			{{ form_widget(form.description, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.description) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.image) }}
+			<div class="form-error">
+				{{ form_errors(form.image) }}
+			</div>
+			{{ form_widget(form.image, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.image) }}</small>
+		</div>
+		<div class="col-12">
+			{{ form_label(form.owner) }}
+			<div class="form-error">
+				{{ form_errors(form.owner) }}
+			</div>
+			{{ form_widget(form.owner, {'attr': {'class': 'form-control frm-input'}}) }}
+			<small>{{ form_help(form.owner) }}</small>
+		</div>
+		<div>
+			<button style="width: 80px;" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+</div>

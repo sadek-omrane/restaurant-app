@@ -1,0 +1,36 @@
+{% extends 'admin/index.html.twig' %}
+{% block title %}Category index
+{% endblock %}
+
+{% block adminContent %}
+	<div style="min-height: 70vh">
+		<h1 style="margin: 50px 0 40px 0;text-align: center;">Booking</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ booking.id }}</td>
+				</tr>
+				<tr>
+					<th>Table</th>
+					<td>{{ booking.nbPerson }}</td>
+				</tr>
+				<tr>
+					<th>BookingAt</th>
+					<td>{{ booking.bookingAt ? booking.bookingAt|date('Y-m-d') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Stat</th>
+					<td>{{ booking.stat ? 'Yes' : 'No' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div style="display: flex">
+			<a class="btn btn-primary" href="{{path('app_admin_booking_crud_edit',{'id':booking.id})}}">edit</a>
+			<span style="margin:0 0 0 4px">{{include('admin/booking_crud/_delete_form.html.twig')}}</span>
+		</div>
+	</div>
+{% endblock %}
