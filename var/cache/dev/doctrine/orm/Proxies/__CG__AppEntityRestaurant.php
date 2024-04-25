@@ -261,7 +261,7 @@ class Restaurant extends \App\Entity\Restaurant implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);

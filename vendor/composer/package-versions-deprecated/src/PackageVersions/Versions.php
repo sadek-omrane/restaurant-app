@@ -129,10 +129,10 @@ final class Versions
   'nikic/php-parser' => 'v4.13.2@210577fe3cf7badcc5814d99455df46564f3c077',
   'symfony/debug-bundle' => 'v5.4.3@6f508169752ed2c0d0d8a6641c4cca39a8f1dfcb',
   'symfony/maker-bundle' => 'v1.38.0@143024ab0e426285d3d9b7f6a3ce51e12a9d8ec5',
-  'symfony/polyfill-ctype' => '*@cbf89bf103e524690dd837b3a8db4d1967087461',
-  'symfony/polyfill-iconv' => '*@cbf89bf103e524690dd837b3a8db4d1967087461',
-  'symfony/polyfill-php72' => '*@cbf89bf103e524690dd837b3a8db4d1967087461',
-  '__root__' => 'dev-master@cbf89bf103e524690dd837b3a8db4d1967087461',
+  'symfony/polyfill-ctype' => '*@95109f227332c6390830522eafba04254de24ced',
+  'symfony/polyfill-iconv' => '*@95109f227332c6390830522eafba04254de24ced',
+  'symfony/polyfill-php72' => '*@95109f227332c6390830522eafba04254de24ced',
+  '__root__' => 'dev-main@95109f227332c6390830522eafba04254de24ced',
 );
 
     private function __construct()
